@@ -1,0 +1,393 @@
+:root {
+  --bg-dark: #0a0e17;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2332;
+  --border-color: #1e3a5f;
+  --border-glow: #2563eb;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --accent-blue: #3b82f6;
+  --accent-red: #ef4444;
+  --accent-amber: #f59e0b;
+  --accent-green: #22c55e;
+  --option-1: #3b82f6;
+  --option-2: #f59e0b;
+  --option-3: #ef4444;
+  --winner-glow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(239, 68, 68, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main-container {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  margin: 10px auto;
+  max-width: 600px;
+}
+
+.title-main {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--text-primary);
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+  margin-bottom: 0;
+}
+
+.title-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  color: var(--accent-red);
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  margin-top: 5px;
+}
+
+.scene-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-amber);
+  margin-bottom: 8px;
+}
+
+.scene-description {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: rgba(17, 24, 39, 0.6);
+}
+
+.vote-btn {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.vote-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.vote-btn-1::before { background: var(--option-1); }
+.vote-btn-2::before { background: var(--option-2); }
+.vote-btn-3::before { background: var(--option-3); }
+
+.vote-btn:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+}
+
+.vote-btn-1:hover { border-color: var(--option-1); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2); }
+.vote-btn-2:hover { border-color: var(--option-2); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2); }
+.vote-btn-3:hover { border-color: var(--option-3); box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2); }
+
+.vote-btn:active {
+  transform: translateY(0);
+}
+
+.vote-btn.disabled-btn {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.vote-btn.disabled-btn:hover {
+  transform: none;
+  background: var(--bg-card);
+}
+
+.vote-btn.winner {
+  border-color: var(--accent-green) !important;
+  box-shadow: var(--winner-glow) !important;
+}
+
+.vote-btn.winner::after {
+  content: 'MAIS VOTADA';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-green);
+  background: rgba(34, 197, 94, 0.15);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.option-number {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.option-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.vote-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.vote-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.vote-percent {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.progress-bar-custom {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.vote-btn-1 .progress-fill { background: var(--option-1); }
+.vote-btn-2 .progress-fill { background: var(--option-2); }
+.vote-btn-3 .progress-fill { background: var(--option-3); }
+
+.total-votes p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.total-number {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.voted-message {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-green);
+  padding: 10px 20px;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 4px;
+  background: rgba(34, 197, 94, 0.1);
+  display: inline-block;
+  animation: fadeIn 0.5s ease;
+}
+
+.waiting-box {
+  padding: 60px 20px;
+}
+
+.pulse-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--accent-amber);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.waiting-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.3rem;
+  letter-spacing: 0.3em;
+  color: var(--text-secondary);
+  animation: blink 3s ease-in-out infinite;
+}
+
+.waiting-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+.btn-admin {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  padding: 6px 16px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.btn-admin:hover {
+  color: var(--text-secondary);
+  border-color: var(--text-muted);
+}
+
+.admin-panel {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 20px;
+  max-width: 700px;
+  margin: 15px auto 0;
+}
+
+.admin-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.admin-input {
+  background: var(--bg-dark) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+}
+
+.admin-input:focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+.btn-admin-action {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 6px 16px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.btn-admin-action:hover {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+}
+
+.footer-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.5); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .title-main {
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+  }
+
+  .title-sub {
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+  }
+
+  .vote-btn {
+    min-height: 140px;
+    padding: 18px 16px;
+  }
+
+  .scene-description {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
