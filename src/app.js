@@ -288,3 +288,11 @@ function loadPreset(num) {
         alert("Cenário " + num + " ativado!");
     }
 }
+
+window.registerVote = registerVote;     // Chamado pelos botões de voto
+window.toggleAdmin = toggleAdmin;       // Chamado pelo botão "PAINEL ADMIN"
+window.resetVotes = resetVotes;         // Chamado pelo botão de Reset
+window.toggleWaiting = toggleWaiting;   // Chamado pelo botão de Alternar Aguardando
+window.updateSceneText = updateSceneText; // Chamado pelo botão Atualizar Cena
+window.updateOptions = updateOptions;   // Chamado pelo botão Atualizar Opções
+window.loadPreset = loadPreset;         // Chamado pelos botões de CENA 01, 02, etc
